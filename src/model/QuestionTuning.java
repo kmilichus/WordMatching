@@ -4,25 +4,19 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.StringTokenizer;
 
-public class Question {
+public class QuestionTuning {
 
 	public final static char[] PUNCTUATION_MARKS ={'.', ',',';','?','!','¿','¡','\'','/','\\','"',')','(','—','_','-',' '};
 
-	private String question;
-
-	private String correctAnswer;
-
-	private String wrongAnswer;
-
+	private Question question;
+	
 	private HashSet<String> mostImportantWords;
 
 
 
-	public Question(String question, String correctAnswer, String wrongAnswer) {
-		this.question = question;
-		this.correctAnswer = correctAnswer;
-		this.wrongAnswer = wrongAnswer;
-
+	public QuestionTuning() {
+		
+		question = null;
 		initializeWords();
 	}
 
@@ -133,7 +127,7 @@ public class Question {
 	 * @param query
 	 * @return
 	 */
-	public double checkSimilarity(Question query){
+	public double checkSimilarity(QuestionTuning query){
 
 		double size = mostImportantWords.size();
 		double numberOfAppereances = 0;
@@ -149,16 +143,8 @@ public class Question {
 
 	}
 
-	public String getQuestion() {
+	public Question getQuestion() {
 		return question;
-	}
-
-	public String getCorrectAnswer() {
-		return correctAnswer;
-	}
-
-	public String getWrongAnswer() {
-		return wrongAnswer;
 	}
 
 	public HashSet<String> getMostImportantWords() {

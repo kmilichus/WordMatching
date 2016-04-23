@@ -5,14 +5,21 @@ import java.util.TreeMap;
 
 public class QuestionChecker {
 	
-	private ArrayList<Question> databaseQuestions;
+	public final static int[] PUNCTUATION_MARKS ={'.', ',',';','?','!','¿','¡','\'','/','\\','"',')','(','—','_','-',' '};
 
-	private TreeMap<Question, ArrayList<Question>> possibleDuplicates;
+	
+	private ArrayList<QuestionTuning> databaseQuestions;
+
+	private TreeMap<QuestionTuning, ArrayList<QuestionTuning>> possibleDuplicates;
 	
 	
 	
 	public QuestionChecker() {
 		
+		
+	}
+	
+	public void downloadDbQuestions (int category){
 		
 	}
 	
@@ -27,11 +34,11 @@ public class QuestionChecker {
 	
 	
 
-	public ArrayList<Question> getDatabaseQuestions() {
+	public ArrayList<QuestionTuning> getDatabaseQuestions() {
 		return databaseQuestions;
 	}
 
-	public void setDatabaseQuestions(ArrayList<Question> databaseQuestions) {
+	public void setDatabaseQuestions(ArrayList<QuestionTuning> databaseQuestions) {
 		this.databaseQuestions = databaseQuestions;
 	}
 	
