@@ -93,9 +93,9 @@ public class Question {
 		for (int i = 0; i < words.size(); i++) {	
 
 			StringBuilder sb  = new StringBuilder();
-			String singleWord = words.get(i);
+			char[] singleWord = words.get(i).toCharArray();
 
-			for (int j = 0; j < singleWord.length(); j++) {				
+			for (int j = 0; j < singleWord.length; j++) {				
 				char letter = question.charAt(j);	
 				if (!isPunctuation(letter)) {
 					sb.append(letter);
