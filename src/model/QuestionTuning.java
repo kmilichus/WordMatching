@@ -5,8 +5,11 @@ import java.util.HashSet;
 import java.util.StringTokenizer;
 
 public class QuestionTuning {
-
-	public final static char[] PUNCTUATION_MARKS ={'.', ',',';','?','!','¿','¡','\'','/','\\','"',')','(','—','_','-',' '};
+	
+	
+	public final static int[] ASCII_CODES_PUNCTUATION_MARKS={46, 44, 59, 63, 33, 191, 161, 39, 47, 92, 34, 41, 40, 95, 45, 32}; 
+	
+	public final static char[] PUNCTUATION_MARKS = new char[ASCII_CODES_PUNCTUATION_MARKS.length];
 
 	private Question question;
 	
@@ -14,18 +17,27 @@ public class QuestionTuning {
 
 
 
-	public QuestionTuning() {
+	public QuestionTuning(Question q) {
 		
-		question = null;
-		initializeWords();
+		question = q;
+		initializePunctuationMarks();
+		processQuestion();
 	}
 
-	private void initializeWords() {
+	private void initializePunctuationMarks() {
+		// TODO Auto-generated method stub
+		for (int i = 0; i < ASCII_CODES_PUNCTUATION_MARKS.length; i++) {
+			PUNCTUATION_MARKS[i]=(char) ASCII_CODES_PUNCTUATION_MARKS[i];
+		}
+		
+	}
+
+	private void processQuestion() {
 
 		mostImportantWords = new HashSet<String>();
 
 
-		String sentences = question + correctAnswer;	
+		String sentences = question.getQuestion() + question.getCorrectAnswer();	
 		sentences = sentences.toLowerCase();
 
 
@@ -90,7 +102,7 @@ public class QuestionTuning {
 			char[] singleWord = words.get(i).toCharArray();
 
 			for (int j = 0; j < singleWord.length; j++) {				
-				char letter = question.charAt(j);	
+				char letter = singleWord[i];
 				if (!isPunctuation(letter)) {
 					sb.append(letter);
 				}
@@ -122,26 +134,7 @@ public class QuestionTuning {
 		return is;
 	}
 
-	/**
-	 * 
-	 * @param query
-	 * @return
-	 */
-	public double checkSimilarity(QuestionTuning query){
 
-		double size = mostImportantWords.size();
-		double numberOfAppereances = 0;
-
-
-		for (String word : query.getMostImportantWords()) {
-
-			if (mostImportantWords.contains(word)) 
-				numberOfAppereances++;	
-		}
-
-		return numberOfAppereances/size;
-
-	}
 
 	public Question getQuestion() {
 		return question;
