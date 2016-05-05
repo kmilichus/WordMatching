@@ -28,7 +28,7 @@ public class Question {
 		if(language < LANGUAGE_CONSTRAINS[0] || language > LANGUAGE_CONSTRAINS[1] || language % LANGUAGE_CONSTRAINS[0] != 0)
 			throw new FormatException("Invalid language code");
 		int regionCode = region %= 1000000;
-		if(regionCode < 1 || regionCode >= 10000)
+		if(region != 0 && (regionCode < 1 || regionCode >= 10000))
 			throw new FormatException("Invalid region code");
 	}
 
@@ -94,6 +94,11 @@ public class Question {
 
 	public void setCreationType(int creationType) {
 		this.creationType = creationType;
+	}
+
+	@Override
+	public String toString() {
+		return "Question [question=" + question + ", correct=" + correctAnswer + ", wrong=" + wrongAnswer + "]";
 	}
 
 }
