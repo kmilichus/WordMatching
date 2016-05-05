@@ -84,6 +84,12 @@ public class QuestionChecker {
 	public void setDatabaseQuestions(ArrayList<QuestionTuning> databaseQuestions) {
 		this.databaseQuestions = databaseQuestions;
 	}
+	
+	
+	public boolean addQuestion(Question q){
+		QuestionTuning qe = new QuestionTuning(q);
+		return databaseQuestions.add(qe);
+	}
 
 
 
