@@ -37,7 +37,7 @@ public class QuestionTuning {
 		mostImportantWords = new HashSet<String>();
 
 
-		String sentences = question.getQuestion() + question.getCorrectAnswer();	
+		String sentences = question.getQuestion() +" "+ question.getCorrectAnswer();	
 		sentences = sentences.toLowerCase();
 
 
@@ -77,6 +77,8 @@ public class QuestionTuning {
 					}
 
 				}
+				
+				token = replaceAccents(token);
 				words.add(token);
 			}
 
@@ -85,6 +87,19 @@ public class QuestionTuning {
 
 
 		return words;
+	}
+
+	private String replaceAccents(String token) {
+	
+		token =token.replace('á', 'a');
+		token =token.replace('é', 'e');
+		token =token.replace('í', 'i');
+		token =token.replace('ó', 'o');
+		token =token.replace('ö', 'o');
+		token =token.replace('ú', 'u');
+		token =token.replace('ü', 'u');
+		
+		return token;
 	}
 
 	/**
@@ -102,7 +117,7 @@ public class QuestionTuning {
 			char[] singleWord = words.get(i).toCharArray();
 
 			for (int j = 0; j < singleWord.length; j++) {				
-				char letter = singleWord[i];
+				char letter = singleWord[j];
 				if (!isPunctuation(letter)) {
 					sb.append(letter);
 				}
@@ -142,6 +157,10 @@ public class QuestionTuning {
 
 	public HashSet<String> getMostImportantWords() {
 		return (HashSet<String>) mostImportantWords;
+	}
+	
+	public void printPunctuationMarks(){
+		System.out.println(PUNCTUATION_MARKS);
 	}
 
 

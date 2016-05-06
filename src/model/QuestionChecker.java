@@ -14,7 +14,7 @@ public class QuestionChecker {
 	 */
 	public QuestionChecker() {
 
-		
+
 	}
 
 	/**
@@ -37,9 +37,9 @@ public class QuestionChecker {
 	public ArrayList<Question> buildSimilarWords(Question q){
 
 		ArrayList<Question> listOfSimilarQuestions = new ArrayList<Question>();
-		
+
 		for (int i = 0; i < databaseQuestions.size(); i++) {
-			
+
 			if (checkSimilarity(q, databaseQuestions.get(i))>= SIMILARITY_LOWER_RATE){
 				listOfSimilarQuestions.add(databaseQuestions.get(i).getQuestion());
 			}
@@ -84,11 +84,28 @@ public class QuestionChecker {
 	public void setDatabaseQuestions(ArrayList<QuestionTuning> databaseQuestions) {
 		this.databaseQuestions = databaseQuestions;
 	}
-	
-	
+
+
 	public boolean addQuestion(Question q){
 		QuestionTuning qe = new QuestionTuning(q);
 		return databaseQuestions.add(qe);
+	}
+
+	public void printSimilarity(Question q) {
+
+		
+		QuestionTuning QE = new QuestionTuning(q);
+		QE.printPunctuationMarks();
+		System.out.println("Values of similarity for "+ q.toString());
+		System.out.println(QE.getMostImportantWords());
+		
+		for (int i = 0; i < databaseQuestions.size(); i++) {
+			double sim =checkSimilarity(q, databaseQuestions.get(i));
+			
+			System.out.println((i+1)+". "+sim+"% "+databaseQuestions.get(i).getQuestion().getQuestion()+"");
+			System.out.println("    "+databaseQuestions.get(i).getMostImportantWords());
+		
+		}
 	}
 
 
