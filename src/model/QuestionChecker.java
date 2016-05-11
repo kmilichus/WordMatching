@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class QuestionChecker {
 
-	public static final double SIMILARITY_LOWER_RATE = 0.5;
+	private final double similarityRate;
 
 	private ArrayList<QuestionTuning> databaseQuestions;
 
@@ -13,8 +13,11 @@ public class QuestionChecker {
 	 * 
 	 */
 	public QuestionChecker() {
+		this.similarityRate = 0.5;
+	}
 
-
+	public QuestionChecker(double similarityRate) {
+		this.similarityRate = similarityRate;
 	}
 
 	/**
@@ -26,7 +29,6 @@ public class QuestionChecker {
 		for (int i = 0; i < dbQuestions.size(); i++) {
 			databaseQuestions.add(new QuestionTuning(dbQuestions.get(i)));
 		}
-
 	}
 
 	/**
@@ -40,7 +42,7 @@ public class QuestionChecker {
 
 		for (int i = 0; i < databaseQuestions.size(); i++) {
 
-			if (checkSimilarity(q, databaseQuestions.get(i))>= SIMILARITY_LOWER_RATE){
+			if (checkSimilarity(q, databaseQuestions.get(i))>= similarityRate){
 				listOfSimilarQuestions.add(databaseQuestions.get(i).getQuestion());
 			}
 		}
@@ -93,25 +95,18 @@ public class QuestionChecker {
 
 	public void printSimilarity(Question q) {
 
-		
+
 		QuestionTuning QE = new QuestionTuning(q);
 		QE.printPunctuationMarks();
 		System.out.println("Values of similarity for "+ q.toString());
 		System.out.println(QE.getMostImportantWords());
-		
+
 		for (int i = 0; i < databaseQuestions.size(); i++) {
 			double sim =checkSimilarity(q, databaseQuestions.get(i));
-			
+
 			System.out.println((i+1)+". "+sim+"% "+databaseQuestions.get(i).getQuestion().getQuestion()+"");
 			System.out.println("    "+databaseQuestions.get(i).getMostImportantWords());
-		
+
 		}
 	}
-
-
-
-
-
-
-
 }
