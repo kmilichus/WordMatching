@@ -27,6 +27,8 @@ public class Question {
 			throw new FormatException("Question and answers must not be null");
 		if(language < LANGUAGE_CONSTRAINS[0] || language > LANGUAGE_CONSTRAINS[1] || language % LANGUAGE_CONSTRAINS[0] != 0)
 			throw new FormatException("Invalid language code");
+		if(category < CATEGORY_CONSTRAINS[0] || category > CATEGORY_CONSTRAINS[1] || category % CATEGORY_CONSTRAINS[0] != 0)
+			throw new FormatException("Invalid category code");
 		int regionCode = region %= 1000000;
 		if(region != 0 && (regionCode < 1 || regionCode >= 10000))
 			throw new FormatException("Invalid region code");
